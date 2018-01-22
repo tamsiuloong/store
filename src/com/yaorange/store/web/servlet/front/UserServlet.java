@@ -113,7 +113,7 @@ public class UserServlet extends BaseServlet {
 					rmCookie.setMaxAge(60*60*24*7);
 					response.addCookie(rmCookie);
 				}
-				return "index.jsp";
+				return "redirect:index.html";
 			}
 			else
 			{
@@ -124,7 +124,7 @@ public class UserServlet extends BaseServlet {
 		{
 			request.setAttribute("msg", "ÑéÖ¤Âë´íÎó");
 		}
-		return "login.jsp";
+		return "login.html";
 		
 		
 	}

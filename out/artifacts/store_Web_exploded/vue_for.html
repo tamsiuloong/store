@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue" type="text/javascript"></script>
+</head>
+<body>
+<div id="example-1">
+<ul >
+    <li v-for="item in items">
+        {{ item.message }}
+    </li>
+</ul>
+</div>
+<table id="example-2">
+<tr class="active" v-for="item in items">
+    <td width="60" width="40%">
+        <input type="hidden" name="id" value="22">
+        <img  width="70" height="60">
+    </td>
+    <td width="30%">
+        <a target="_blank"> {{ item.message }}</a>
+    </td>
+    <td width="20%">
+        ￥298.00
+    </td>
+    <td width="10%">
+        <input type="text" name="quantity" value="1" maxlength="4" size="10">
+    </td>
+    <td width="15%">
+        <span class="subtotal">￥596.00</span>
+    </td>
+    <td>
+        <a href="javascript:;" class="delete">删除</a>
+    </td>
+</tr>
+</table>
+
+<script type="text/javascript">
+    var example1 = new Vue({
+        el: '#example-2',
+        data: {
+            items: [
+                {message: 'Foo'},
+                {message: 'Bar'}
+            ]
+        }
+    })
+</script>
+</body>
+</html>

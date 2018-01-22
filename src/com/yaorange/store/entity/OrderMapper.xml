@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yaorange.store.dao.OrderDao">
+	<sql id="ordercols">oid,ordertime,total,state,address,name,telephone,uid</sql>
+
+	<sql id="orderitemcols">itemid,count,subtotal,pid,oid</sql>
+
+	<resultMap type="order" id="orderOrderItemRM">
+
+		<id property="oid" column="oid" />
+		<result property="ordertime" column="ordertime" />
+		<result property="total" column="total" />
+		<result property="state" column="state" />
+		<result property="address" column="address" />
+		<result property="name" column="name" />
+		<result property="uid" column="uid" />
+		<!-- 对多:一个订单下有多个订单项 ofType:对多关系的实体类型 -->
+		<collection property="orderItemList" ofType="orderitem">
+			<id property="itemid" column="itemid" />
+			<result property="count" column="count" />
+			<result property="subtotal" column="subtotal" />
+			<!--对一:一个订单项 对应 一个商品 -->
+			<association property="product" javaType="product">
+				<id property="pid" column="pid" />
+				<result property="pname" column="pname" />
+				<result property="shop_price" column="shop_price" />
+				<result property="pimage" column="pimage" />
+			</association>
+
+		</collection>
+
+
+	</resultMap>
+
+	<insert id="save" parameterType="order">
+		insert into orders (
+		<include refid="ordercols" />
+		)
+		values(#{oid},#{ordertime},#{total},#{state},#{address},#{name},#{telephone},#{uid});
+	</insert>
+
+	<insert id="saveOrderItem" parameterType="orderitem">
+		insert into orderitem (
+		<include refid="orderitemcols" />
+		) values(#{itemid},#{count},#{subtotal},#{pid},#{oid})
+	</insert>
+
+
+	<select id="getTotalCount" parameterType="string" resultType="int">
+		select count(oid) from orders where uid = #{uid}
+	</select>
+
+	<select id="getOrderListByUid" parameterType="string" resultMap="orderOrderItemRM">
+		SELECT
+		 o.oid,p.shop_price,oi.count,oi.subtotal,p.pimage,p.pname
+		FROM
+		(
+			SELECT
+			<include refid="ordercols"/>
+			FROM
+			orders
+			WHERE
+			uid = #{param1}
+			LIMIT #{param2},
+			#{param3}
+		) o
+		LEFT JOIN orderitem oi ON o.oid = oi.oid
+		left join product p on oi.pid = p.pid
+	</select>
+	
+	
+	<update id="updateState" parameterType="string">
+		update orders set state = #{param2} where oid = #{param1}
+	</update>
+</mapper>
+

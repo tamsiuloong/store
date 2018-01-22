@@ -63,7 +63,11 @@ public class BaseServlet extends HttpServlet {
 	{
 		return null;
 	}
-
+	protected void writeJson(String json,HttpServletResponse res) throws IOException {
+		res.setContentType("text/javascript;charset=utf-8");
+		res.getWriter().write(json);
+		res.getWriter().flush();
+	}
 
 	public User getUser(HttpServletRequest req) {
 		return (User) req.getSession().getAttribute("user");

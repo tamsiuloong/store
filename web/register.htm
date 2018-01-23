@@ -32,8 +32,8 @@ font {
 }
  </style>
 </head>
-<body>
-
+<body >
+	<div id="app">
 
 
 
@@ -48,13 +48,7 @@ font {
 				<div class="col-md-5">
 					<img src="img/header.png" />
 				</div>
-				<div class="col-md-3" style="padding-top:20px">
-					<ol class="list-inline">
-						<li><a href="login.htm">登录</a></li>
-						<li><a href="register.htm">注册</a></li>
-						<li><a href="cart.htm">购物车</a></li>
-					</ol>
-				</div>
+				<my-userinfo></my-userinfo>
 			</div>
 			<!--
             	时间：2015-12-30
@@ -108,12 +102,13 @@ font {
 	
 
 
-	<div class="col-md-8" style="background:#fff;padding:40px 80px;margin:30px;border:7px solid #ccc;" id="app">
+	<div class="col-md-8" style="background:#fff;padding:40px 80px;margin:30px;border:7px solid #ccc;" >
 		<font>会员注册</font>USER REGISTER
 		<form class="form-horizontal" style="margin-top:5px;">
 			 <div class="form-group">
 			    <label for="username" class="col-sm-2 control-label">用户名</label>
 			    <div class="col-sm-6">
+
 			      <input type="text" class="form-control" id="username"  v-model="username" @blur="checkUsername" placeholder="请输入用户名"><span :style="{ color: color}">{{msg}}<span>
 			    </div>
 			  </div>
@@ -208,10 +203,12 @@ font {
 		<div style="text-align: center;margin-top: 5px;margin-bottom:20px;">
 			Copyright &copy; 2005-2016 天虎商城 版权所有
 		</div>
-
-			<script src="https://cdn.jsdelivr.net/npm/vue" type="text/javascript"></script>
-			<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	</div>
+<script src="https://cdn.jsdelivr.net/npm/vue" type="text/javascript"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="./js/components/userinfo.js"></script>
 <script type="text/javascript" src="./js/vue/register.js"></script>
+
 </body></html>
 
 

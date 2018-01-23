@@ -1,8 +1,33 @@
 var vm = new Vue({
     el: '#app',
-    data: {},
+    data: {
+        username: '',
+        password: '',
+        yzmCode: '',
+        msg:'',
+        color:'red'
+    },
     methods: {
-        dosth: function () {
+        login: function () {
+
+
+            // 发送 POST 请求
+            axios({
+                method: 'post',
+                url: '/user.do?method=login',
+                params: {
+                    'username': this.username,
+                    'password': this.password,
+                    'yzmCode': this.yzmCode
+                }
+            }).then(response => {
+                if (response.data.ok) {
+                    location.href = 'index.html';
+                } else {
+                    this.msg = response.data.msg;
+                }
+
+            });
 
         }
     },

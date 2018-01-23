@@ -8,32 +8,34 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.yaorange.store.entity.Page;
 import com.yaorange.store.entity.Product;
+import com.yaorange.store.entity.vo.Result;
 import com.yaorange.store.service.ProductService;
 import com.yaorange.store.service.impl.ProductServiceImpl;
 import com.yaorange.store.web.BaseServlet;
+import com.yaorange.store.web.JsonServlet;
 
 /**
  * Servlet implementation class ProductServlet
  */
 @WebServlet("/product.do")
-public class ProductServlet extends BaseServlet {
+public class ProductServlet extends JsonServlet {
 
 	private ProductService productService = new ProductServiceImpl();
 
-	public String getHotProductList(HttpServletRequest req, HttpServletResponse resp) {
+	public Result getHotProductList(HttpServletRequest req, HttpServletResponse resp) {
 		// 加载热门商品list
 		List<Product> productList = productService.findHotList();
 		req.setAttribute("productList", productList);
-		return "module/index_product_list.jsp";
+
+		return new Result(true,productList);
 	}
 
-	public String getProductListByCid(HttpServletRequest req, HttpServletResponse resp) {
+	public Result getProductListByCid(HttpServletRequest req, HttpServletResponse resp) {
 		// 获取参数
 		String cid = req.getParameter("cid");
 		String currPage = req.getParameter("currPage");
 		Page page = productService.findListByCid(cid, currPage);
-		req.setAttribute("page", page);
-		return "product_list.jsp";
+		return new Result(true,page);
 	}
 	public String getProductInfo(HttpServletRequest req, HttpServletResponse resp) {
 		// 获取参数

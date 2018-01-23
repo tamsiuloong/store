@@ -25,18 +25,11 @@ public class ProductServiceImpl implements ProductService {
 	public Page findListByCid(String cid, String currPage) {
 		SqlSession sqlSession = MybatisUtils.openSession();
 		ProductDao dao = sqlSession.getMapper(ProductDao.class);
-		Integer cPage = 1;//Ĭ�ϵ�һҳ
-		if(currPage!=null)
-		{
-			cPage = Integer.valueOf(currPage);
-		}
-		
-		Page result = new Page();
-		result.setCurrPage(cPage);
-		
+
 		Integer totalCount = dao.getTotalCountByCid(cid);
-		result.setTotalCount(totalCount);
-		
+		Page result = new Page(currPage,totalCount);
+
+
 		List<Product> list = dao.findListByCid(cid,result.getBeginRow(),result.getPageSize());
 		result.setList(list);
 		

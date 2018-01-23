@@ -1,5 +1,6 @@
 package com.yaorange.store.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @author Administrator
  *
  */
-public class Page {
+public class Page implements Serializable{
 	private List list;
 	
 	private Integer currPage;//当前页
@@ -15,7 +16,8 @@ public class Page {
 	private Integer pageSize=12;//每页显示多少条数据
 	private Integer totalCount;//总共多少条数据
 
-	
+	private Integer nextPage;
+	private Integer prePage;
 	public Page() {
 		super();
 	}
@@ -85,6 +87,7 @@ public class Page {
 		{
 			result = 1;
 		}
+		this.prePage = result;
 		return result;
 	}
 	/**
@@ -94,10 +97,11 @@ public class Page {
 	public Integer getNextPage(){
 		Integer result = 0;
 		result = currPage+1;
-		if(result>totalPage)
+		if(result>getTotalPage())
 		{
 			result = totalPage;
 		}
+		this.nextPage= result;
 		return result;
 	}
 	

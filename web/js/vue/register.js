@@ -1,5 +1,13 @@
 
+// 注册
+Vue.component('my-component', {
+    template: '<div>A custom component!</div>'
+})
 
+// 注册
+Vue.component('my-test', {
+    template: '<div>test</div>'
+})
 var vm = new Vue({
     el: '#app',
     data: {
@@ -24,7 +32,7 @@ var vm = new Vue({
                 }
             }).then( (response)=> {
                     //alert(data);
-                    if(response.data){
+                    if(response.data.ok){
                         this.msg='该账号已被使用';
                         this.color="red";
                     }

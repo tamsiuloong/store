@@ -2,19 +2,22 @@ var vm = new Vue({
     el: '#app',
     data: {
         productList:{},
-        cid:''
+        cid:'',
+        page:{}
     },
     methods: {
-        init: function () {
+        init: function (pageNo) {
             this.cid = this.getQueryVariable("cid");
             //ajax请求
             axios.get('product.do', {
                 params: {
                     'method': 'getProductListByCid',
-                    'cid':this.cid
+                    'cid':this.cid,
+                    'currPage':pageNo
                 }
             }).then( (response)=> {
                 if(response.data.ok){
+                    this.page = response.data.data;
                     this.productList = response.data.data.list;
                 }
             });
@@ -32,7 +35,7 @@ var vm = new Vue({
     },
     mounted: function () {
         this.$nextTick(function () {
-            this.init();
+            this.init(1);
         })
     },
     computed: {}

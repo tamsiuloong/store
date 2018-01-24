@@ -88,7 +88,7 @@
             <a href="product_info.htm">
                 <img :src="p.pimage" width="170" height="170" style="display: inline-block;">
             </a>
-            <p><a href="product_info.html" style='color:green'>{{p.pname}}</a></p>
+            <p><a href="product_info.html" style='color:green'>{{p.pname.substr(0,14)}}</a></p>
             <p><font color="#FF0000">商城价：&yen;{{p.shop_price}}</font></p>
         </div>
 
@@ -97,20 +97,13 @@
     </div>
 
     <!--分页 -->
+
     <div style="width:380px;margin:0 auto;margin-top:50px;">
         <ul class="pagination" style="text-align:center; margin-top:10px;">
-            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">6</a></li>
-            <li><a href="#">7</a></li>
-            <li><a href="#">8</a></li>
-            <li><a href="#">9</a></li>
-            <li>
-                <a href="#" aria-label="Next">
+            <li class="{ active: page.currPage==1 }"><a href="#" @click="init(page.prePage)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+            <li :class="{ active: p==page.currPage }" v-for="p in page.totalPage"><a href="#" @click="init(p)">{{p}}</a></li>
+            <li class="{ active: page.currPage==page.totalPage }">
+                <a href="#" aria-label="Next" @click="init(page.nextPage)">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

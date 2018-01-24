@@ -1,6 +1,7 @@
 package com.yaorange.store.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yaorange.store.entity.Product;
 
@@ -8,14 +9,16 @@ public interface ProductDao {
 
 	List<Product> findHotList();
 
-	List<Product> findListByCid(String cid,Integer beginRow,Integer pageSize);
+	List<Product> findListByCid(Map<String, Object> paramMap);
 	/**
 	 * 获取该类商品总数量
-	 * @param cid
+	 * @param paramMap
 	 * @return
 	 */
-	Integer getTotalCountByCid(String cid);
+	Integer getTotalCountByCid(Map<String, Object> paramMap);
 
 	Product findById(String pid);
+
+	void update(Product product);
 
 }

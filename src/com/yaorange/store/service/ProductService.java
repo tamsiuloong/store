@@ -19,4 +19,6 @@ public interface ProductService {
 
 	Product findById(String pid);
 
+	void update(Product product);
+
 }

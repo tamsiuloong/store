@@ -27,25 +27,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-	<select id="findListByCid" resultType="product" parameterType="string">
+	<select id="findListByCid" resultType="product" parameterType="map">
 		select
 			<include refid="cols"/>
 		from
 			product
-		where  
-			cid = #{param1}
-		limit #{param2},#{param3}			
+		
+		<where>  
+			<if test="cid != null">and cid = #{cid}</if>
+			<if test="pflag != null"> and pflag = #{pflag}</if>
+		</where>
+		limit #{beginRow},#{pageSize}			
 			
 	</select>
 	
 	
-	<select id="getTotalCountByCid" resultType="int" parameterType="string">
+	<select id="getTotalCountByCid" resultType="int" parameterType="map">
 		select
 			count(cid)
 		from
 			product
-		where  
-			cid = #{param1}
+		
+		<where>   
+			<if test="cid != null"> and cid = #{cid}</if>
+			<if test="pflag != null"> and pflag = #{pflag}</if>
+		</where>
 	</select>
 	
 	
@@ -57,5 +63,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where  
 			pid = #{param1}
 	</select>
+	
+	<update id="update" parameterType="product">
+		update product set 
+			pname=#{pname},
+			market_price=#{market_price},
+			shop_price=#{shop_price},
+			pimage=#{pimage},
+			is_hot=#{is_hot},
+			pdesc=#{pdesc},
+			pflag=#{pflag},
+			cid=#{cid}
+		where pid = #{pid}
+	</update>
 </mapper>
 

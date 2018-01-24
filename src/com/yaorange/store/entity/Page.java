@@ -1,23 +1,21 @@
 package com.yaorange.store.entity;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
- * 分页实体(里面包含分页信息，显示list数据)
+ * 锟斤拷页实锟斤拷(锟斤拷锟斤拷锟斤拷锟斤拷锟揭筹拷锟较拷锟斤拷锟绞緇ist锟斤拷锟斤拷)
  * @author Administrator
  *
  */
-public class Page implements Serializable{
+public class Page {
 	private List list;
 	
-	private Integer currPage;//当前页
-	private Integer totalPage;//总共多少页
-	private Integer pageSize=12;//每页显示多少条数据
-	private Integer totalCount;//总共多少条数据
+	private Integer currPage;//锟斤拷前页
+	private Integer totalPage;//锟杰癸拷锟斤拷锟斤拷页
+	private Integer pageSize=12;//每页锟斤拷示锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+	private Integer totalCount;//锟杰癸拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
 
-	private Integer nextPage;
-	private Integer prePage;
+	
 	public Page() {
 		super();
 	}
@@ -69,7 +67,7 @@ public class Page implements Serializable{
 		this.totalCount = totalCount;
 	}
 	/**
-	 * 获取起始数
+	 * 锟斤拷取锟斤拷始锟斤拷
 	 * @return
 	 */
 	public Integer getBeginRow() {
@@ -77,7 +75,7 @@ public class Page implements Serializable{
 	}
 	
 	/**
-	 * 获取上一页
+	 * 锟斤拷取锟斤拷一页
 	 * @return
 	 */
 	public Integer getPrePage(){
@@ -87,11 +85,10 @@ public class Page implements Serializable{
 		{
 			result = 1;
 		}
-		this.prePage = result;
 		return result;
 	}
 	/**
-	 * 获取下一页
+	 * 锟斤拷取锟斤拷一页
 	 * @return
 	 */
 	public Integer getNextPage(){
@@ -101,7 +98,6 @@ public class Page implements Serializable{
 		{
 			result = totalPage;
 		}
-		this.nextPage= result;
 		return result;
 	}
 	
